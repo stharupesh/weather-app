@@ -1,0 +1,179 @@
+/**
+ * LOADING ANIMATION STYLE
+ */
+
+#loading {
+	content: '';
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(255, 255, 255, 0.4);
+	background-repeat: no-repeat;
+}
+
+#loading-animation {
+	margin: auto;
+    background-image: url(images/loading.svg);
+    background-repeat: no-repeat;
+    height: 200px;
+    width: 200px;
+    top: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/**
+ * MAIN COMPONENTS CONTAINER
+ */
+
+.main-container {
+	background-image: url("images/background.jpg");
+	background-repeat: no-repeat;
+	max-width: 800px;
+	margin: 0 auto;
+    font-family: 'Work Sans', sans-serif;
+    color: #fff;
+    padding: 0px 17%;
+}
+
+/**
+ * STYLE FOR DISPLAYING CURRENT WEATHER
+ */
+
+.main-container h1.city-name {
+	text-align: center;
+    margin-top: 50px;
+	margin-bottom: 40px;
+}
+
+.main-container .weather-status-icon {
+	margin: 0 auto;
+    display: block;
+    width: 150px;
+}
+
+.main-container .navigation-arrow {
+	width: 55px;
+	cursor: pointer;
+}
+
+.main-container .current-temperature {
+	text-align: center;
+	font-size: 45px;
+}
+
+.main-container .current-temperature sup {
+	font-size: 40%;
+	top: -1.5em;
+	left: -0.5em;
+}
+
+.main-container .min-max-temperature {
+	font-weight: 300;
+    font-size: 20px;
+    text-align: center;
+}
+
+.main-container .min-max-temperature sup {
+	font-size: 50%;
+    top: -1.1em;
+    left: -0.3em;
+}
+
+.main-container .min-temperature,
+.main-container .max-temperature {
+	display: inline-block;
+    padding: 0px 20px;
+    margin-top: 10px;
+}
+
+.main-container .current-weather-status {
+	font-size: 19px;
+	text-align: center;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.divider {
+    display: block;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.49);
+    margin-bottom: 15px;
+}
+
+/**
+ * STYLE FOR DISPLAYING FUTURE DAYS WEATHER
+ */
+
+.weekly-weather-status {
+	margin-bottom: 50px;
+}
+
+.weekly-weather-status .week-name {
+	text-align: center;
+}
+
+.weekly-weather-status .week-weather-status-icon {
+	text-align: center;
+}
+
+.weekly-weather-status .week-weather-status-icon img {
+	height: 50px;
+	margin-top: 7px;
+	margin-bottom: 7px;
+}
+
+.weekly-weather-status .overall-temperature {
+	text-align: center;
+}
+
+/**
+ * STYLE FOR RESPONSIVE MOBILE DESIGN
+ */
+
+@media(max-width: 768px) {
+	.main-container {
+		padding: 0 10%;
+	}
+}
+
+@media(max-width: 568px) {
+	.main-container {
+		padding: 0 10% 0 5%;
+	}
+
+	.main-container .weather-status-icon {
+		width: 120px;
+	}
+
+	.main-container .navigation-arrow {
+		width: 40px;
+	}
+
+	.main-container h1.city-name {
+	    margin-top: 30px;
+	    margin-bottom: 25px;
+	    font-size: 34px;
+	}
+
+	.main-container .current-temperature {
+		font-size: 35px;
+	}
+
+	.main-container .min-max-temperature{
+		font-size: 16px;
+	}
+
+	.main-container .min-temperature,
+	.main-container .max-temperature {
+		margin-top: 5px;
+	}
+
+	.main-container .current-weather-status {
+		font-size: 18px;
+		font-weight: 300;
+	}
+}

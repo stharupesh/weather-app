@@ -1,0 +1,1 @@
+To run this app, simply open index.html on your internet browser
