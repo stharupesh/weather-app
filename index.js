@@ -66,26 +66,26 @@ $(function() {
 	 */
 	function WeatherApp() {
 		
-		let thisRef = this;
+		let me = this;
 
-		this.currentCityIndex = 0, // to store current city
+		me.currentCityIndex = 0, // to store current city
 
-		this.appElements = null; // to store html elements used in the app which needs manipulation or update
+		me.appElements = null; // to store html elements used in the app which needs manipulation or update
 
 		/**
 		 * returns current city show in the app
 		 * @return {Object} [description]
 		 */
-		this.getCurrentCity = function() {
-			return CITIES[this.currentCityIndex];
+		me.getCurrentCity = function() {
+			return CITIES[me.currentCityIndex];
 		},
 
 		/**
 		 * fetches the weather data of current city and return promise
 		 * @return {Promise} [description]
 		 */
-		this.getCurrentCityWeatherData = function() {
-			let currentCity = this.getCurrentCity();
+		me.getCurrentCityWeatherData = function() {
+			let currentCity = me.getCurrentCity();
 
 			return $.ajax({
 				url: API_URL + '/?lat=' + currentCity.location.lat + '&lon=' + currentCity.location.lon,
@@ -100,86 +100,86 @@ $(function() {
 		 * checks if the current city shown is the last one in the city list
 		 * @return {Boolean} [description]
 		 */
-		this.isLastCity = function() {
-			return (this.currentCityIndex == (CITIES.length - 1));
+		me.isLastCity = function() {
+			return (me.currentCityIndex == (CITIES.length - 1));
 		},
 
 		/**
 		 * checks if the current city is the first one in the list
 		 * @return {Boolean} [description]
 		 */
-		this.isFirstCity = function() {
-			return (this.currentCityIndex == 0);
+		me.isFirstCity = function() {
+			return (me.currentCityIndex == 0);
 		},
 
 		/**
 		 * sets the next city in the list as current city
 		 * @return {[type]} [description]
 		 */
-		this.paginateToNextCity = function() {
-			if(!this.isLastCity())
-				this.currentCityIndex++;
+		me.paginateToNextCity = function() {
+			if(!me.isLastCity())
+				me.currentCityIndex++;
 		},
 
 		/**
 		 * sets the previous city in teh lsit as current city
 		 * @return {[type]} [description]
 		 */
-		this.paginateToPreviousCity = function() {
-			if(!this.isFirstCity())
-				this.currentCityIndex--;
+		me.paginateToPreviousCity = function() {
+			if(!me.isFirstCity())
+				me.currentCityIndex--;
 		},
 
 		/**
 		 * sets the first city in the list as current city
 		 * @return {[type]} [description]
 		 */
-		this.paginateToFirstCity = function() {
-			this.currentCityIndex = 0;
+		me.paginateToFirstCity = function() {
+			me.currentCityIndex = 0;
 		},
 
 		/**
 		 * sets the last city in the list as current city
 		 * @return {[type]} [description]
 		 */
-		this.paginateToLastCity = function() {
-			this.currentCityIndex = CITIES.length - 1;
+		me.paginateToLastCity = function() {
+			me.currentCityIndex = CITIES.length - 1;
 		},
 
 		/**
 		 * shows loading animation on the screen
 		 * @return {[type]} [description]
 		 */
-		this.showLoading = function() {
-			this.appElements.loading.show();
+		me.showLoading = function() {
+			me.appElements.loading.show();
 		},
 
 		/**
 		 * hides the loading animation in the screen
 		 * @return {[type]} [description]
 		 */
-		this.hideLoading = function() {
-			this.appElements.loading.hide();
+		me.hideLoading = function() {
+			me.appElements.loading.hide();
 		},
 
 		/**
 		 * reloads the weather data of the current city
 		 * @return {[type]} [description]
 		 */
-		this.reloadWeatherData = function() {
+		me.reloadWeatherData = function() {
 			// show loading animation
-			this.showLoading();
+			me.showLoading();
 
 			// fetch the weather data of current city from the server through api
-			this.getCurrentCityWeatherData()
+			me.getCurrentCityWeatherData()
 
 			.done(function(response, status) {
 				if(status == 'success') { // if successfully fetched then show the data
-					let data = thisRef.getFilteredData(response.data);
+					let data = me.getFilteredData(response.data);
 					
-					thisRef.showData(data);
+					me.showData(data);
 
-					thisRef.hideLoading(); // hide the loading animation after the data is shown
+					me.hideLoading(); // hide the loading animation after the data is shown
 				}
 			});
 		},
@@ -189,19 +189,19 @@ $(function() {
 		 * @param  {[type]} data [description]
 		 * @return {[type]}      [description]
 		 */
-		this.showData = function(data) {
+		me.showData = function(data) {
 
-			this.appElements.currentCityName.html(this.getCurrentCity().name);
-			this.appElements.currentTemperature.html(data.currentTemperature);
-			this.appElements.minTemperature.html(data.minTemperature);
-			this.appElements.maxTemperature.html(data.maxTemperature);
-			this.appElements.currentWeatherStatus.html(data.weatherStatus);
-			this.appElements.currentWeatherStatusIcon.attr('src', data.weatherStatusIcon);
+			me.appElements.currentCityName.html(me.getCurrentCity().name);
+			me.appElements.currentTemperature.html(data.currentTemperature);
+			me.appElements.minTemperature.html(data.minTemperature);
+			me.appElements.maxTemperature.html(data.maxTemperature);
+			me.appElements.currentWeatherStatus.html(data.weatherStatus);
+			me.appElements.currentWeatherStatusIcon.attr('src', data.weatherStatusIcon);
 
-			for(let i = 0; i < this.appElements.futureDaysStatus.length; i++) {
-				this.appElements.futureDaysStatus[i].day.html(data.futureDays[i].dayName);
-				this.appElements.futureDaysStatus[i].statusIcon.attr('src', data.futureDays[i].statusIcon);
-				this.appElements.futureDaysStatus[i].temperature.html(data.futureDays[i].temperature);
+			for(let i = 0; i < me.appElements.futureDaysStatus.length; i++) {
+				me.appElements.futureDaysStatus[i].day.html(data.futureDays[i].dayName);
+				me.appElements.futureDaysStatus[i].statusIcon.attr('src', data.futureDays[i].statusIcon);
+				me.appElements.futureDaysStatus[i].temperature.html(data.futureDays[i].temperature);
 			}
 		},
 
@@ -210,21 +210,21 @@ $(function() {
 		 * @param  {[type]} rawData [description]
 		 * @return {[type]}         [description]
 		 */
-		this.getFilteredData = function(rawData) {
+		me.getFilteredData = function(rawData) {
 			let filteredData = {
-				currentTemperature: thisRef.getFormattedTemperature(rawData[0].temp),
-				minTemperature: thisRef.getFormattedTemperature(rawData[0].min_temp),
-				maxTemperature: thisRef.getFormattedTemperature(rawData[0].max_temp),
-				weatherStatusIcon: thisRef.getWeatherStatusIcon(rawData[0].weather.code),
+				currentTemperature: me.getFormattedTemperature(rawData[0].temp),
+				minTemperature: me.getFormattedTemperature(rawData[0].min_temp),
+				maxTemperature: me.getFormattedTemperature(rawData[0].max_temp),
+				weatherStatusIcon: me.getWeatherStatusIcon(rawData[0].weather.code),
 				weatherStatus: rawData[0].weather.description,
 				futureDays: []
 			};
 
 			for(let i = 1; i < 6; i++) {
 				filteredData.futureDays.push({
-					dayName: thisRef.getDayNameFromDate(rawData[i].datetime),
-					statusIcon: thisRef.getWeatherStatusIcon(rawData[i].weather.code),
-					temperature: thisRef.getFormattedTemperature(rawData[i].max_temp) + '/' + thisRef.getFormattedTemperature(rawData[i].min_temp)
+					dayName: me.getDayNameFromDate(rawData[i].datetime),
+					statusIcon: me.getWeatherStatusIcon(rawData[i].weather.code),
+					temperature: me.getFormattedTemperature(rawData[i].max_temp) + '/' + me.getFormattedTemperature(rawData[i].min_temp)
 				});
 			}
 
@@ -236,7 +236,7 @@ $(function() {
 		 * @param  {[type]} temperature [description]
 		 * @return {[type]}             [description]
 		 */
-		this.getFormattedTemperature = function(temperature) {
+		me.getFormattedTemperature = function(temperature) {
 			return parseInt(Math.round(temperature));
 		},
 
@@ -245,7 +245,7 @@ $(function() {
 		 * @param  {[type]} statusCode [description]
 		 * @return {[type]}            [description]
 		 */
-		this.getWeatherStatusIcon = function(statusCode) {
+		me.getWeatherStatusIcon = function(statusCode) {
 			for(let i = 0; i < WEATHER_STATUS_CODES.length; i++) {
 				if(statusCode >= WEATHER_STATUS_CODES[i].min && statusCode <= WEATHER_STATUS_CODES[i].max)
 					return WEATHER_STATUS_CODES[i].icon;
@@ -257,7 +257,7 @@ $(function() {
 		 * @param  {[type]} dateString [description]
 		 * @return {[type]}            [description]
 		 */
-		this.getDayNameFromDate = function(dateString) {
+		me.getDayNameFromDate = function(dateString) {
 			return DAYS[(new Date(dateString)).getDay()];
 		},
 
@@ -265,23 +265,23 @@ $(function() {
 		 * initialize listeners for dom elements like clicking the pagination buttons
 		 * @return {[type]} [description]
 		 */
-		this.initializeListeners = function() {
-			this.appElements.navigationArrowLeft.click(function() { // if left arrow clicked
-				if(!thisRef.isFirstCity())
-					thisRef.paginateToPreviousCity();
+		me.initializeListeners = function() {
+			me.appElements.navigationArrowLeft.click(function() { // if left arrow clicked
+				if(!me.isFirstCity())
+					me.paginateToPreviousCity();
 				else
-					thisRef.paginateToLastCity();
+					me.paginateToLastCity();
 
-				thisRef.reloadWeatherData();
+				me.reloadWeatherData();
 			});
 
-			this.appElements.navigationArrowRight.click(function() { // if right arrow clicked
-				if(!thisRef.isLastCity())
-					thisRef.paginateToNextCity();
+			me.appElements.navigationArrowRight.click(function() { // if right arrow clicked
+				if(!me.isLastCity())
+					me.paginateToNextCity();
 				else
-					thisRef.paginateToFirstCity();
+					me.paginateToFirstCity();
 
-				thisRef.reloadWeatherData();
+				me.reloadWeatherData();
 			});
 		},
 
@@ -289,7 +289,7 @@ $(function() {
 		 * returns the list of dom elements where are needed to be manipulated or updated in the app
 		 * @return {[type]} [description]
 		 */
-		this.getElements = function() {
+		me.getElements = function() {
 			let elements = {
 				mainContainer: $('.main-container'),
 				loading: $('#loading'),
@@ -323,10 +323,10 @@ $(function() {
 		 * start the app
 		 * @return {[type]} [description]
 		 */
-		this.initialize = function() {
-			this.appElements = this.getElements();
-			this.initializeListeners();
-			this.reloadWeatherData();
+		me.initialize = function() {
+			me.appElements = me.getElements();
+			me.initializeListeners();
+			me.reloadWeatherData();
 		}
 	};
 
