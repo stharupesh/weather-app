@@ -1,3 +1,9 @@
+body {
+	background-image: url("images/background.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
 /**
  * LOADING ANIMATION STYLE
  */
@@ -31,8 +37,6 @@
  */
 
 .main-container {
-	background-image: url("images/background.jpg");
-	background-repeat: no-repeat;
 	max-width: 800px;
 	margin: 0 auto;
     font-family: 'Work Sans', sans-serif;
